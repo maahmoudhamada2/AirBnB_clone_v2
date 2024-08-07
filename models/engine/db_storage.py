@@ -49,8 +49,20 @@ class DBStorage:
             self.save()
 
     def all(self, cls=None):
+        """Method to return list of all objs available"""
+        from models.state import State
+        from models.city import City
         if cls is None:
-            return {'ky1': 'val1'}
+            custom_objs = {}
+            records= []
+            classes = [State, City]
+            for cls in classes:
+                records.append(self.__session.query(cls).all())
+
+            for row in records:
+                key = "{}.{}".format(row[0].__class__.__name__, row[0].id)
+                custom_objs.update({key: row[0]})
+            return custom_objs
         else:
             custom_objs = {}
             records = self.__session.query(cls).all()
