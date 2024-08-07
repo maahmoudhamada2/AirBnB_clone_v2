@@ -234,11 +234,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """Method to print all str repr of all objs"""
-        objs = storage.all()
-        lst = []
-        for value in objs.values():
-            lst.append(str(value))
         if not line:
+            objs = storage.all()
+            lst = []
+            for value in objs.values():
+                lst.append(str(value))
             print(lst)
         else:
             args = line.split()

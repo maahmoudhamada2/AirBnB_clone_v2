@@ -54,7 +54,7 @@ class DBStorage:
         from models.city import City
         if cls is None:
             custom_objs = {}
-            records= []
+            records = []
             classes = [State, City]
             for cls in classes:
                 records.append(self.__session.query(cls).all())
