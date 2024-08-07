@@ -28,6 +28,7 @@ class DBStorage:
         """Method to create both session and create tables in db"""
         from models.city import City
         from models.state import State
+        from models.user import User
 
         Base.metadata.create_all(self.__engine)
         session_factory =\
@@ -52,6 +53,8 @@ class DBStorage:
         """Method to return list of all objs available"""
         from models.state import State
         from models.city import City
+        from models.user import User
+
         if cls is None:
             custom_objs = {}
             records = []
