@@ -50,7 +50,11 @@ class DBStorage:
 
     def all(self, cls=None):
         if cls is None:
-            pass
+            return {'ky1': 'val1'}
         else:
-            print(cls, type(cls))
-            return "{'ky1': 'val1'}"
+            custom_objs = {}
+            records = self.__session.query(cls).all()
+            for obj in records:
+                key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                custom_objs.update({key: obj})
+            return custom_objs

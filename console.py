@@ -249,6 +249,10 @@ class HBNBCommand(cmd.Cmd):
                 pass
 
             if _cls and _cls in self.classes:
+                lst = []
+                objs = storage.all(self.classes[_cls])
+                for value in objs.values():
+                    lst.append(str(value))
                 print(lst)
             else:
                 print("** class doesn't exist **")
