@@ -30,6 +30,7 @@ class DBStorage:
         from models.state import State
         from models.user import User
         from models.place import Place
+        from models.review import Review
 
         Base.metadata.create_all(self.__engine)
         session_factory =\
@@ -56,11 +57,12 @@ class DBStorage:
         from models.city import City
         from models.user import User
         from models.place import Place
+        from models.review import Review
 
         if cls is None:
             custom_objs = {}
             records = []
-            classes = [State, City, Place]
+            classes = [State, City, Place, Review]
             for cls in classes:
                 records.append(self.__session.query(cls).all())
 

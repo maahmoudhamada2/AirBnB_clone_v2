@@ -18,6 +18,7 @@ class State(BaseModel, Base):
         name = ""
         __cities = "list of cities instances"
 
+        # TODO ADDING GETTER METHOD FOR CITY Class
         @property
         def cities(self):
             """The cities property."""
