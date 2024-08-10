@@ -8,6 +8,7 @@ from sqlalchemy import Column, String, DateTime
 
 Base = declarative_base()
 
+
 class BaseModel:
     """A base class for all hbnb models"""
 
@@ -25,9 +26,13 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Constructor method"""
-        if args:
-            pass
-        elif kwargs and kwargs != {}:
+        if not kwargs:
+            self.id = str(uuid4())
+            self.date_converter(1)
+
+        else:
+            self.id = str(uuid4())
+            self.date_converter(1)
             for key in kwargs.keys():
                 if key == '__class__':
                     continue
@@ -35,9 +40,6 @@ class BaseModel:
                     self.date_converter(2, key, kwargs[key])
                 else:
                     setattr(self, key, kwargs[key])
-        else:
-            self.id = str(uuid4())
-            self.date_converter(1)
 
     def __str__(self):
         """Returns a string representation of the instance"""
