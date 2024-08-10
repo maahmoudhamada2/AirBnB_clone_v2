@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+
+
 from models.base_model import BaseModel, Base
 from models import storage
 from models.city import City
@@ -16,13 +18,14 @@ class State(BaseModel, Base):
         cities = relationship('City', backref='state', cascade="all, delete")
     else:
         name = ""
-        __cities = "list of cities instances"
+        cities = ""
 
-        # TODO ADDING GETTER METHOD FOR CITY Class
         @property
         def cities(self):
-            """The cities property."""
+            """The cities getter method"""
             objs = storage.all(City)
-            print(self.id)
-            print(objs)
-            return self.__cities
+            objs_list = []
+            for obj in objs.values():
+                if obj.state_id == self.id:
+                    objs_list.append(obj)
+            return objs_list

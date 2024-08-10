@@ -77,3 +77,7 @@ class DBStorage:
                 key = "{}.{}".format(obj.__class__.__name__, obj.id)
                 custom_objs.update({key: obj})
             return custom_objs
+
+    def close(self):
+        """Method to close and remove current session"""
+        self.__session.remove()
