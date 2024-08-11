@@ -61,15 +61,14 @@ class DBStorage:
 
         if cls is None:
             custom_objs = {}
-            records = []
             classes = [State, City, Place, Review]
             for cls in classes:
-                records.append(self.__session.query(cls).all())
-
-            for row in records:
-                key = "{}.{}".format(row[0].__class__.__name__, row[0].id)
-                custom_objs.update({key: row[0]})
+                records = self.__session().query(cls).all()
+                for row in records:
+                    key = "{}.{}".format(row.__class__.__name__, row.id)
+                    custom_objs.update({key: row})
             return custom_objs
+
         else:
             custom_objs = {}
             records = self.__session.query(cls).all()
